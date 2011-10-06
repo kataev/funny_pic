@@ -7,6 +7,7 @@ dojo.require('dojo.io.iframe');
 
 dojo.require('dijit.form.TextBox');
 dojo.require('dijit.form.Button');
+dojo.require('dijit.form.Select');
 
 dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.TabContainer");
@@ -17,6 +18,7 @@ dojo.addOnLoad(function() {
     dojo.query('[type=file]').addClass('dijitTextBox')
 
     dojo.parser.parse();
+    var select = new dijit.form.Select(null,'id_font');
     dijit.byId('ajax').onClick = function(e) {
         dojo.stopEvent(e);
         dojo.io.iframe.send({form:'form',handleAs:'json',

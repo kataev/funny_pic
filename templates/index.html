@@ -2,35 +2,44 @@
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ru"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-{#  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">#}
+    <meta charset="utf-8">
+    {#  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">#}
 
-  <title>Создай свой демотиватор</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <title>Создай свой демотиватор</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{#  <meta name="viewport" content="width=device-width,initial-scale=1">#}
+    {#  <meta name="viewport" content="width=device-width,initial-scale=1">#}
 
-  <!-- CSS concatenated and minified via ant build script-->
+    <!-- CSS concatenated and minified via ant build script-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Gochi+Hand">
     <style type="text/css">html, body { width: 100%; height: 100%; margin: 0; }</style>
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link href="https://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css" rel="stylesheet">
-  <!-- end CSS-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css" rel="stylesheet">
+    <!-- end CSS-->
 
-{#  <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>#}
+    {#  <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>#}
 </head>
 
 <body class='claro'>
 <div dojoType="dijit.layout.BorderContainer" style='height: 100%;width: 100%;'>
-    <div dojoType="dijit.layout.ContentPane" region='top'>
-        <form enctype="multipart/form-data" action="./" method="POST" id='form'>
-            <input dojoType='dijit.form.TextBox' placeholder="Заголовок" name='head'>
-            <input dojoType='dijit.form.TextBox' placeholder="Подпись" name='text'>
-            <input style='width: 250px;' name='file' type='file'>
-            <button id='ajax' dojoType='dijit.form.Button'>Отправить</button>
-        </form>
+    <div dojoType="dijit.layout.BorderContainer" style='height: 50px;' region='top'>
+        <div dojoType="dijit.layout.ContentPane" region='left'>
+            <h1 style='margin: 0px;font-family: "Gochi Hand",serif;'>bteam.perm.ru</h1>
+            </div>
+        <div dojoType="dijit.layout.ContentPane" region='center'>
+
+            <form enctype="multipart/form-data" action="./" method="POST" id='form'>
+                <input dojoType='dijit.form.TextBox' placeholder="Заголовок" name='head'>
+                <input dojoType='dijit.form.TextBox' placeholder="Подпись" name='text'>
+                {{ form.font }}
+                <input style='width: 250px;' name='file' type='file'>
+                <button id='ajax' dojoType='dijit.form.Button'>Отправить</button>
+            </form>
+        </div>
     </div>
     <div dojoType="dijit.layout.ContentPane" region='center' id='content'>
         <div id='olo'></div>
@@ -38,14 +47,14 @@
 </div>
 
 
-  <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js"></script>
-  <script>window.dojo || document.write('<script src="js/libs/dojo/dojo.xd.js"><\/script>')</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js"></script>
+<script>window.dojo || document.write('<script src="js/libs/dojo/dojo.xd.js"><\/script>')</script>
 
 
-  <!-- scripts concatenated and minified via ant build script-->
-  <script defer src="/static/js/plugins.js"></script>
-  <script defer src="/static/js/script.js"></script>
-  <!-- end scripts-->
+<!-- scripts concatenated and minified via ant build script-->
+<script defer src="/static/js/plugins.js"></script>
+<script defer src="/static/js/script.js"></script>
+<!-- end scripts-->
 
 
 {#  <script>#}
@@ -56,10 +65,10 @@
 {#  </script>#}
 
 
-  <!--[if lt IE 7 ]>
+<!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
   <![endif]-->
-  
+
 </body>
 </html>

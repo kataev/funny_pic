@@ -6,10 +6,28 @@ from settings import PROJECT_PATH
 from subprocess import call
 import datetime
 
+fonts = [('Andika.ttf', 'Andika'),
+ ('EBGaramond.ttf', 'EBGaramond'),
+ ('KellySlab.ttf', 'KellySlab'),
+ ('PT_Sans-Caption.ttf', 'PT_Sans-Caption'),
+ ('AnonymousPro.ttf', 'AnonymousPro'),
+ ('Forum.ttf', 'Forum'),
+ ('Lobster.ttf', 'Lobster'),
+ ('PT_Sans-Web.ttf', 'PT_Sans-Web'),
+ ('Cuprum.ttf', 'Cuprum'),
+ ('IstokWeb.ttf', 'IstokWeb'),
+ ('Neucha.ttf', 'Neucha'),
+ ('DidactGothic.ttf', 'DidactGothic'),
+ ('Jura.ttf', 'Jura'),
+ ('OpenSans.ttf', 'OpenSans')]
+
+
+
 class UploadFileForm(forms.Form):
     head = forms.CharField(max_length=500,required=False)
     text = forms.CharField(max_length=50,required=False)
     file = forms.FileField()
+    font = forms.ChoiceField(choices=fonts,required=False)
 
 #    ajax = forms.BooleanField(required=False)
 
@@ -29,7 +47,10 @@ def upload_file(request):
             f.close()
             head = form.cleaned_data.get('head')
             text = form.cleaned_data.get('text')
-            font = PROJECT_PATH+"/fonts/PT_Sans/PT_Sans-Web-Bold.ttf"
+            if form.cleaned_data.get('font'):
+                font = PROJECT_PATH+"/fonts/%s" % form.cleaned_data.get('font')
+            else:
+                font = PROJECT_PATH+"/fonts/PT_Sans-Web.ttf"
             out = f.name+'out.jpg'
             call(['convert','-scale','640',f.name,out])
             call(['mogrify', '-bordercolor','black','-border','2','-bordercolor','white',
