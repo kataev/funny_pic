@@ -29,7 +29,7 @@ def upload_file(request):
             f.close()
             head = form.cleaned_data.get('head')
             text = form.cleaned_data.get('text')
-            font = "/home/bteam/funny_pic/fonts/PT_Sans/PT_Sans-Web-Bold.ttf"
+            font = PROJECT_PATH+"/fonts/PT_Sans/PT_Sans-Web-Bold.ttf"
             out = f.name+'out.jpg'
             call(['convert','-scale','640',f.name,out])
             call(['mogrify', '-bordercolor','black','-border','2','-bordercolor','white',
