@@ -13,7 +13,7 @@
                 .then(function(data){console.log(data.success,data.errors)
                             if (data.img){
                                 setTimeout(function(){
-                                    dojo.create('img',{src:'/static/img/'+data.img+'.jpg'},'olo');
+                                    dojo.create('img',{src:'/static/img/'+data.img},'olo');
                                 },1000)
 
                             }

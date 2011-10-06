@@ -1,2 +1,5 @@
 *.pyc
 .idea
+fonts
+funny
+static/img/*
