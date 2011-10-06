@@ -10,7 +10,14 @@
         dojo.addOnLoad(function(){
             dojo.connect(dojo.byId('ajax'),'onclick',function(e){
                 dojo.io.iframe.send({form:'form',handleAs:'json'})
-                .then(function(data){console.log(data.success,data.errors)},
+                .then(function(data){console.log(data.success,data.errors)
+                            if (data.img){
+                                setTimeout(function(){
+                                    dojo.create('img',{src:'/static/img/'+data.img+'.jpg'},'olo');
+                                },1000)
+
+                            }
+                        },
                 function(){console.log("error'ульки")})
             });
         });
@@ -20,9 +27,10 @@
 <body>
 <form enctype="multipart/form-data" action="./" method="POST" id='form'>
 {{ form }}
-<button type="submit">submit</button>
+{#<button type="submit">submit</button>#}
     </form>
 
-<span id='ajax'>SEND AJAX</span>
+<span id='ajax' style='border:1px black solid;'>SEND AJAX</span>
+<div id='olo'></div>
 </body>
 </html>
