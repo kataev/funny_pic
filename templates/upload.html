@@ -2,35 +2,26 @@
 <html>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js" type="text/javascript"></script>
+    <script src="/static/js/script.js" type="text/javascript"></script>
     <title>test</title>
-    <script>
-        dojo.require('dojo.io.iframe');
-        dojo.require('dojox.form.FileInput');
-
-        dojo.addOnLoad(function(){
-            dojo.connect(dojo.byId('ajax'),'onclick',function(e){
-                dojo.io.iframe.send({form:'form',handleAs:'json'})
-                .then(function(data){console.log(data.success,data.errors)
-                            if (data.img){
-                                setTimeout(function(){
-                                    dojo.create('img',{src:'/static/img/'+data.img},'olo');
-                                },1000)
-
-                            }
-                        },
-                function(){console.log("error'ульки")})
-            });
-        });
-    </script>
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+    </style>
 
 </head>
-<body>
-<form enctype="multipart/form-data" action="./" method="POST" id='form'>
-{{ form }}
-{#<button type="submit">submit</button>#}
-    </form>
-
-<span id='ajax' style='border:1px black solid;'>SEND AJAX</span>
-<div id='olo'></div>
+<body class='claro'>
+<div dojoType="dijit.layout.BorderContainer" style='height: 100%;width: 100%;'>
+    <div dojoType="dijit.layout.ContentPane" region='top'>
+        <form enctype="multipart/form-data" action="./" method="POST" id='form'>
+            <input dojoType='dijit.form.TextBox' placeholder="Заголовок" name='head'>
+            <input dojoType='dijit.form.TextBox' placeholder="Подпись" name='text'>
+            <input name='file' type='file'>
+            <button id='ajax' dojoType='dijit.form.Button'>Отправить</button>
+        </form>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" region='center' id='content'>
+        <div id='olo'></div>
+    </div>
+</div>
 </body>
 </html>

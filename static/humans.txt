@@ -1,0 +1,13 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Катаев Денис
+  Site: bteam.perm.ru
+  Twitter: None
+  Location: Russia Perm
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, Dojo, Django

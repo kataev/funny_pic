@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import simplejson
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
 from settings import PROJECT_PATH
 from subprocess import call
@@ -11,6 +11,8 @@ class UploadFileForm(forms.Form):
     text = forms.CharField(max_length=50,required=False)
     file = forms.FileField()
 
+#    ajax = forms.BooleanField(required=False)
+
 
 def upload_file(request):
     """
@@ -19,6 +21,7 @@ def upload_file(request):
     STATIC_ROOT = PROJECT_PATH + '/static/'
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
+
         if form.is_valid():
             f = open(STATIC_ROOT+'img/%s.jpg' % datetime.datetime.now().isoformat(),'wb+')
             for chunk in request.FILES['file'].chunks():
@@ -39,10 +42,12 @@ def upload_file(request):
                   '-label',text,out,out])
             if head or text: call(['mogrify','-bordercolor','black','-border','5x45',out])
             call(['convert',out,out])
-
-        return HttpResponse("<textarea>%s</textarea>" % simplejson.dumps({'success':form.is_valid(),
+        if request.POST.get('ajax'):
+            return HttpResponse("<textarea>%s</textarea>" % simplejson.dumps({'success':form.is_valid(),
                'value':1,'errors':form.errors,'img':out.split('/')[-1]}))
+        else:
+            return HttpResponseRedirect('/static/img/%s' % out.split('/')[-1])
     else:
 
         form = UploadFileForm()
-    return render(request,'upload.html',{'form':form})
+    return render(request,'index.html',{'form':form})
