@@ -2,7 +2,7 @@
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
 {#  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">#}
@@ -11,14 +11,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+{#  <meta name="viewport" content="width=device-width,initial-scale=1">#}
 
   <!-- CSS concatenated and minified via ant build script-->
+    <style type="text/css">html, body { width: 100%; height: 100%; margin: 0; }</style>
   <link rel="stylesheet" href="/static/css/style.css">
   <link href="https://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css" rel="stylesheet">
   <!-- end CSS-->
 
-  <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
+{#  <script src="/static/js/libs/modernizr-2.0.6.min.js"></script>#}
 </head>
 
 <body class='claro'>
@@ -47,12 +48,12 @@
   <!-- end scripts-->
 
 
-  <script>
-    window._gaq = [['_setAccount','UA-9193293-2'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-  </script>
+{#  <script>#}
+{#    window._gaq = [['_setAccount','UA-9193293-2'],['_trackPageview'],['_trackPageLoadTime']];#}
+{#    Modernizr.load({#}
+{#      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'#}
+{#    });#}
+{#  </script>#}
 
 
   <!--[if lt IE 7 ]>
