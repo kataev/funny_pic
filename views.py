@@ -3,8 +3,8 @@ from django.utils import simplejson
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render
 from settings import PROJECT_PATH
-from subprocess import call
 import datetime
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 fonts = [('Andika.ttf', 'Andika'),
  ('EBGaramond.ttf', 'EBGaramond'),
@@ -48,21 +48,53 @@ def upload_file(request):
             head = form.cleaned_data.get('head')
             text = form.cleaned_data.get('text')
             if form.cleaned_data.get('font'):
-                font = PROJECT_PATH+"/fonts/%s" % form.cleaned_data.get('font')
+                font_path = PROJECT_PATH+"/fonts/%s" % form.cleaned_data.get('font')
             else:
-                font = PROJECT_PATH+"/fonts/PT_Sans-Web.ttf"
-            out = f.name+'out.jpg'
-            call(['convert','-scale','640',f.name,out])
-            call(['mogrify', '-bordercolor','black','-border','2','-bordercolor','white',
-                  '-border','2','-bordercolor','black','-border','70x0',out])
-            if head: call(['montage','-geometry','+0+0','-background','black','-fill','white',
-                  '-font',font,'-pointsize', '64',
-                  '-label',head,out,out])
-            if text: call(['montage','-geometry','+0+0','-background','black','-fill','white',
-                  '-font',font,'-pointsize', '32',
-                  '-label',text,out,out])
-            if head or text: call(['mogrify','-bordercolor','black','-border','5x45',out])
-            call(['convert',out,out])
+                font_path = PROJECT_PATH+"/fonts/PT_Sans-Web.ttf"
+
+            out = f.name.split('.')
+            out.insert(-1, 'out')
+            if out[-1].lower() not in ['jpeg', 'jpg']:
+                out[-1] = 'jpg'
+            out = '.'.join(out)
+
+            top = 40
+            right = 40
+            bottom = 40
+            left = 40
+            head_font_size = 46
+            text_font_size = 20
+
+            head_font = ImageFont.truetype(font_path, head_font_size, encoding='utf-8')
+            text_font = ImageFont.truetype(font_path, text_font_size, encoding='utf-8')
+
+            img_upload = Image.open(f.name)
+            img_upload_brd = ImageOps.expand(img_upload, border=2, fill='white')
+
+            img_new = Image.new(
+                img_upload_brd.mode, (
+                    img_upload_brd.size[0] + left + right,
+                    img_upload_brd.size[1] + top + bottom + head_font.getsize(head)[1] + text_font.getsize(text)[1]
+                )
+            )
+            img_new.paste(
+                img_upload_brd, (
+                    top,
+                    right,
+                    img_upload_brd.size[0]+bottom,
+                    img_upload_brd.size[1]+left
+                )
+            )
+
+            draw = ImageDraw.Draw(img_new)
+            x = (img_new.size[0] / 2) - (head_font.getsize(head)[0] / 2)
+            draw.text((x, img_upload_brd.size[1]+top+10), head, fill='white', font=head_font)
+
+            x = (img_new.size[0] / 2) - (text_font.getsize(text)[0] / 2)
+            draw.text((x, img_upload_brd.size[1]+top+head_font.getsize(head)[1]+10), text, fill='white', font=text_font)
+
+            img_new.save(out, 'JPEG')
+
         if request.POST.get('ajax'):
             return HttpResponse("<textarea>%s</textarea>" % simplejson.dumps({'success':form.is_valid(),
                'value':1,'errors':form.errors,'img':out.split('/')[-1]}))
