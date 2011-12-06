@@ -26,9 +26,13 @@
 
 <body class='claro'>
 <div dojoType="dijit.layout.BorderContainer" style='height: 100%;width: 100%;'>
-    <div dojoType="dijit.layout.ContentPane" region='left' id='preview'></div>
+    <div dojoType="dijit.layout.ContentPane" region='left' class='bar' id='preview'></div>
+
 
     <div dojoType="dijit.layout.BorderContainer" style='height: 50px;' region='top'>
+        <div dojoType="dijit.layout.ContentPane" region='left' class='bar' id='head'>
+            <h1>Funny pic</h1>
+        </div>
         <div dojoType="dijit.layout.ContentPane" region='center'> {% include 'form.html' %} </div>
     </div>
     <div dojoType="dijit.layout.StackContainer" region='center' id='StackContainer'>

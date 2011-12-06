@@ -125,10 +125,19 @@ td { vertical-align: top; }
 
 #StackContainer {text-align: center;}
 
+.bar { width:90px; }
+
+#head h1 {
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-top: 7px
+}
+
 #preview {
     counter-reset: my-badass-counter;
     overflow-y: auto;
-    width:90px;
 }
 
 #preview img {
