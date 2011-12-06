@@ -7,7 +7,7 @@ audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 audio:not([controls]) { display: none; }
 [hidden] { display: none; }
 
-html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html { font-size: 100%; overflow-y: auto; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 body { margin: 0; font-size: 13px; line-height: 1.231; }
 body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 
@@ -124,6 +124,26 @@ td { vertical-align: top; }
 }
 
 #StackContainer {text-align: center;}
+
+#preview {
+    counter-reset: my-badass-counter;
+    overflow-y: auto;
+    width:90px;
+}
+
+#preview img {
+    width:100%;
+    margin-bottom:4px;
+}
+
+#preview span:before {
+    color:#ffffff;
+    padding-left: 2px;
+    position: absolute;
+    z-index: 100;
+    content: counter(my-badass-counter,upper-roman);
+	counter-increment: my-badass-counter;
+}
 
 #StackContainer img {
     max-height:100%;

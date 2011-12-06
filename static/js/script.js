@@ -31,8 +31,9 @@ dojo.addOnLoad(function() {
 
                     dijit.byId('StackContainer').addChild(container)
                     dijit.byId('StackContainer').selectChild(container)
-
-                    var prev = dojo.create('img',{src:'/static/img/' + data.img,style:'width:80px;margin-bottom:4px;'},dijit.byId('preview').domNode)
+                    var div = dojo.create('div',null,dijit.byId('preview').domNode)
+                    dojo.create('span',null,div)
+                    var prev = dojo.create('img',{src:'/static/img/' + data.img},div)
 
                     dojo.connect(prev,'onclick',function(){dijit.byId('StackContainer').selectChild(container)})
                 }
