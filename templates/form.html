@@ -1,0 +1,13 @@
+<form enctype="multipart/form-data" action="./" method="POST" id='form' dojoType='dijit.form.Form'>
+    <input dojoType='dijit.form.TextBox' placeholder="Заголовок" name='head'>
+    <input dojoType='dijit.form.TextBox' placeholder="Подпись" name='text'>
+
+    <select name="font" dojoType='dijit.form.Select'>
+        {% for v,n in form.fields.font.choices %}
+        <option value="{{ v }}">{{ n }}</option>
+        {% endfor %}
+        </select>
+
+    <input style='width: 250px;' name='file' type='file'>
+    <button id='ajax' dojoType='dijit.form.Button'>Отправить</button>
+</form>

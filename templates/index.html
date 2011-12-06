@@ -26,26 +26,18 @@
 
 <body class='claro'>
 <div dojoType="dijit.layout.BorderContainer" style='height: 100%;width: 100%;'>
-    <div dojoType="dijit.layout.BorderContainer" style='height: 50px;' region='top'>
-        <div dojoType="dijit.layout.ContentPane" region='left'>
-            <h1 style='margin: 0px;font-family: "Gochi Hand",serif;'>bteam.perm.ru</h1>
-            </div>
-        <div dojoType="dijit.layout.ContentPane" region='center'>
+    <div dojoType="dijit.layout.ContentPane" region='left' style='width:80px' id='preview'></div>
 
-            <form enctype="multipart/form-data" action="./" method="POST" id='form'>
-                <input dojoType='dijit.form.TextBox' placeholder="Заголовок" name='head'>
-                <input dojoType='dijit.form.TextBox' placeholder="Подпись" name='text'>
-                {{ form.font }}
-                <input style='width: 250px;' name='file' type='file'>
-                <button id='ajax' dojoType='dijit.form.Button'>Отправить</button>
-            </form>
+    <div dojoType="dijit.layout.BorderContainer" style='height: 50px;' region='top'>
+        <div dojoType="dijit.layout.ContentPane" region='left'><h2 id='left'>Влево</h2></div>
+        <div dojoType="dijit.layout.ContentPane" region='right'><h2 id='right'>Вправо</h2></div>
+        <div dojoType="dijit.layout.ContentPane" region='center'>
+            {% include 'form.html' %}
         </div>
     </div>
-    <div dojoType="dijit.layout.ContentPane" region='center' id='content'>
-        <div id='olo'></div>
+    <div dojoType="dijit.layout.StackContainer" region='center' id='StackContainer'>
     </div>
 </div>
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js"></script>
 <script>window.dojo || document.write('<script src="js/libs/dojo/dojo.xd.js"><\/script>')</script>

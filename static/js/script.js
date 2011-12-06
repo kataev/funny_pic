@@ -8,17 +8,20 @@ dojo.require('dojo.io.iframe');
 dojo.require('dijit.form.TextBox');
 dojo.require('dijit.form.Button');
 dojo.require('dijit.form.Select');
+dojo.require('dijit.form.Form');
 
 dojo.require("dijit.layout.BorderContainer");
-dojo.require("dijit.layout.TabContainer");
+dojo.require("dijit.layout.StackContainer");
 dojo.require("dijit.layout.ContentPane");
 
 dojo.addOnLoad(function() {
-
     dojo.query('[type=file]').addClass('dijitTextBox')
 
     dojo.parser.parse();
-    var select = new dijit.form.Select(null,'id_font');
+    dojo.connect(dojo.byId('left'),'onclick',function(){dijit.byId('StackContainer').back()});
+    dojo.connect(dojo.byId('right'),'onclick',function(){dijit.byId('StackContainer').forward()});
+
+
     dijit.byId('ajax').onClick = function(e) {
         dojo.stopEvent(e);
         dojo.io.iframe.send({form:'form',handleAs:'json',
@@ -26,11 +29,15 @@ dojo.addOnLoad(function() {
             .then(function(data) {
                 console.log(data)
                 if (data.img) {
-                    setTimeout(function() {
-                        dojo.create('img', {src:'/static/img/' + data.img,
-                            height:dijit.byId('content').h}, 'olo');
-                    }, 1000)
+                    var container = new dijit.layout.ContentPane({region:'top'});
+                    dojo.create('img',{src:'/static/img/' + data.img},container.domNode);
 
+                    dijit.byId('StackContainer').addChild(container)
+                    dijit.byId('StackContainer').selectChild(container)
+
+                    var prev = dojo.create('img',{src:'/static/img/' + data.img,style:'width:80px;margin-bottom:4px;'},dijit.byId('preview').domNode)
+
+                    dojo.connect(prev,'onclick',function(){dijit.byId('StackContainer').selectChild(container)})
                 }
             },
             function(e) {

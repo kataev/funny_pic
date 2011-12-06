@@ -51,7 +51,7 @@ def upload_file(request):
                 font_path = PROJECT_PATH+"/fonts/%s" % form.cleaned_data.get('font')
             else:
                 font_path = PROJECT_PATH+"/fonts/PT_Sans-Web.ttf"
-
+	    print request.POST
             out = f.name.split('.')
             out.insert(-1, 'out')
             if out[-1].lower() not in ['jpeg', 'jpg']:
@@ -62,8 +62,8 @@ def upload_file(request):
             right = 40
             bottom = 40
             left = 40
-            head_font_size = 46
-            text_font_size = 20
+            head_font_size = 36
+            text_font_size = 18
 
             head_font = ImageFont.truetype(font_path, head_font_size, encoding='utf-8')
             text_font = ImageFont.truetype(font_path, text_font_size, encoding='utf-8')
