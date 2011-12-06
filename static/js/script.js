@@ -18,9 +18,6 @@ dojo.addOnLoad(function() {
     dojo.query('[type=file]').addClass('dijitTextBox')
 
     dojo.parser.parse();
-    dojo.connect(dojo.byId('left'),'onclick',function(){dijit.byId('StackContainer').back()});
-    dojo.connect(dojo.byId('right'),'onclick',function(){dijit.byId('StackContainer').forward()});
-
 
     dijit.byId('ajax').onClick = function(e) {
         dojo.stopEvent(e);
